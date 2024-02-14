@@ -1,3 +1,66 @@
+/*
+===============================
+Css simulation with google font
+===============================
+*/
+@font-face {
+  font-family: Alexandria;
+  src: url(../public/Alexandria-ExtraLight.ttf);
+  font-weight: 100
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url(../public/Alexandria-Light.ttf);
+  font-weight: 300
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url(../public/Alexandria-Regular.ttf);
+  font-weight: 500
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url(../public/Alexandria-Bold.ttf);
+  font-weight: 700
+}
+
+
+/*
+===============================
+iconButton effect
+===============================
+*/
+.icon-button:hover {
+  transition: all 0.5s;
+}
+
+.icon-button:hover {
+  background-color: #c5c5c5 !important;
+  box-shadow: 0 7px 7px rgba(0, 0, 0, 0.5);
+}
+
+/*
+===============================
+todo-card effect
+===============================
+*/
+.card-body {
+  transition: all 0.5s !important;
+}
+
+.card-body:hover {
+  padding: 10px 0px;
+}
+
+
+
+
+
+
+
 .App {
   text-align: center;
 }
@@ -28,11 +91,17 @@
   color: #61dafb;
 }
 
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+body {
+  background-image: linear-gradient(90deg, #0800249e 0%, #090979f5 35%, #00d4ff91 100%)
 }
