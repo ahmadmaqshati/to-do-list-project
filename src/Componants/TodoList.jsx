@@ -14,42 +14,42 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Todo from './Todo';
 import Grid from '@mui/material/Unstable_Grid2';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { jsx } from '@emotion/react';
 
 const initionlTodos = [
     {
         id: uuidv4(),
-        title: "قرأءة كتاب",
-        details: "سينبسنبسناسناسنباسنباياسلبليسب",
+        title: "1)قراءة سورة الملك بعد العشاء",
+        details: "<من قرأ تبارك الذي بيده الملك كل ليلة منعه الله عز وجل بها من عذاب القبر>",
         isComleted: false
 
     },
     {
         id: uuidv4(),
-        title: "ممارسة السباحة",
-        details: "ييسيسيسيسيسيسسيسي",
+        title: "2)فهم الuseEffect في رياكت",
+        details: "",
         isComleted: false
     },
-    {
-        id: uuidv4(),
-        title: "ترتيب البيت",
-        details: "يييسيسسيسييسيسيس",
-        isComleted: false
-    },
-    {
-        id: uuidv4(),
-        title: "قرأءة كتاب",
-        details: "سينبسنبسناسناسنباسنباياسلبليسب",
-        isComleted: false
 
+    {
+        id: uuidv4(),
+        title: "3) مراجعة الasync/await في الجافا سكريبت",
+        details: "",
+        isComleted: false
     }
+
 ]
+
 export default function TodoList() {
     const [todos, setTodos] = useState(initionlTodos)
     const [todosFeild, setTodosFeild] = useState("")
+    const [displayedTodosType, setDisplayedTodosType] = useState('all')
 
-    //EVENT
+
+
+    /////////////////////////////////EVENT////////////////////////////////////////
     /*
     ================================================================================
      Adding A New Todo to List Todos
@@ -62,7 +62,9 @@ export default function TodoList() {
             details: "",
             isComleted: false
         }
-        setTodos([...todos, AddTodos])
+        const UpdatedTodos = [...todos, AddTodos]
+        setTodos(UpdatedTodos)
+        localStorage.setItem('todos', JSON.stringify(UpdatedTodos))
         setTodosFeild('')
     }
     /*
@@ -78,8 +80,11 @@ export default function TodoList() {
             return t
         })
         setTodos(updatTodo)
-    }
+        localStorage.setItem('todos', JSON.stringify(updatTodo))
 
+
+
+    }
 
     /*========================================================
     Mapping on Data Array that Stored Inside (State)
@@ -88,6 +93,41 @@ export default function TodoList() {
     const todosDisplay = todos.map((t) => {
         return <Todo key={t.id} objectTodo={t} handleCheck={handleCheckclicked} todos={todos} setTodos={setTodos} /* handlDelete={handlDeleteConfirm} */ />
     })
+
+
+    /* UseEffect */
+    useEffect(() => {
+        setTodos(JSON.parse(localStorage.getItem("todos")))
+    }, [])
+
+    //Filtration Array 
+    const completedTodos = todos.filter((t) => {
+        return t.isComleted
+    })
+    const nonCompletedTodos = todos.filter((t) => {
+        return !t.isComleted
+    })
+    let todosToBeRenderd = todos
+    if (displayedTodosType == 'completed') {
+        todosToBeRenderd = completedTodos
+    } else if (displayedTodosType == 'nonCompleted') {
+        todosToBeRenderd = nonCompletedTodos
+    }
+
+
+    const todosShow = todosToBeRenderd.map((t) => {
+        return <Todo key={t.id} objectTodo={t} handleCheck={handleCheckclicked} todos={todos} setTodos={setTodos} /* handlDelete={handlDeleteConfirm} */ />
+    })
+
+
+
+    function changeDisplayType(e) {
+        setDisplayedTodosType(e.target.value)
+    }
+
+
+
+
 
     return (
         <Container maxWidth="sm">
@@ -99,37 +139,45 @@ export default function TodoList() {
                     </Typography>
                     <Divider />
 
+                    {/*
+                    ==========================================
+                    Filter Buttons
+                    ==========================================
+                    */}
                     <ToggleButtonGroup
-                        /* value={alignment}
+                        value={displayedTodosType}
                         exclusive
-                        onChange={handleAlignment}*/
+                        onChange={changeDisplayType}
                         aria-label="text alignment"
                         style={{ direction: "ltr", marginTop: "30px" }}
                     >
 
-                        <ToggleButton value="left" style={{ color: "#ffffffc9", fontWeight: "900" }}>
+                        <ToggleButton value="nonCompleted" style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             غير منجز
                         </ToggleButton>
-                        <ToggleButton value="center" style={{ color: "#ffffffc9", fontWeight: "900" }}>
+                        <ToggleButton value="completed" style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             منجز
                         </ToggleButton>
-                        <ToggleButton value="right" style={{ color: "#ffffffc9", fontWeight: "900" }}>
+                        <ToggleButton value="all" style={{ color: "#ffffffc9", fontWeight: "900" }}>
                             الكل
                         </ToggleButton>
 
 
                     </ToggleButtonGroup>
+                    {/* //////////////////////////////////////////////////////// */}
+
 
                     {/* ======================== ALL TODOS =====================*/}
 
                     {/*
                     ===================================================
                     Injecting Array Data Mapping With 
-                      Child Componant(Todo Componant) Into JSX
+                    Child Componant(Todo Componant) Into JSX
                     ==================================================
                      */}
 
-                    {todosDisplay}
+                    {/*  {todosDisplay} */}
+                    {todosShow}
 
                     {/* ======================== ALL TODOS ====================== */}
 

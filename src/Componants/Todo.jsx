@@ -29,7 +29,7 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
 
     /*
     ================================================================================
-    Control Opening And Closing Delete Dialog By Contoling State Value
+    Control Opening And Closing (Delete) Dialog By Contoling State Value
     ================================================================================
     */
 
@@ -39,6 +39,22 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
     function handleDeleteDialogClose() {
         setShowDeleteDialog(false)
     }
+
+
+    /*
+    =================================================================================
+        Control Opening And Closing (Edit) Dialog By Contoling State Value
+    =================================================================================
+    */
+    function handleEditClick() {
+        setShowUpdateDialog(true)
+
+    }
+    function handleUpdateDialogClose() {
+        setShowUpdateDialog(false)
+    }
+
+
 
     /*
     ==================================================================================
@@ -55,29 +71,15 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
             }
         })
         setTodos(DeletTodo)
+        localStorage.setItem('todos', JSON.stringify(DeletTodo))
+
     }
-
-
 
     /*
-    =================================================================================
-    Control Opening And Closing Edit Dialog By Contoling State Value
-    =================================================================================
-    */
-    function handleEditClick() {
-        setShowUpdateDialog(true)
-
-    }
-    function handleUpdateDialogClose() {
-        setShowUpdateDialog(false)
-    }
-
-
-    /*
-    =================================================================================
-    handle With Edited Todos
-    =================================================================================    
-    */
+       =================================================================================
+       handle With Edited Todos
+       =================================================================================    
+       */
     function handlUpdateCliked() {
         const EditedTodo = todos.map((t) => {
             if (t.id == objectTodo.id) {
@@ -87,8 +89,12 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
             }
         })
         setTodos(EditedTodo)
+        localStorage.setItem('todos', JSON.stringify(EditedTodo))
+
         setShowUpdateDialog(false)
     }
+
+
 
 
     return (
@@ -195,7 +201,6 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
                         </Grid>
                         <Grid xs={4} display='flex' justifyContent="space-around" alignItems="center"  >
 
-
                             {/*
                             =============
                             Check-Button
@@ -209,7 +214,6 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
                                     border: "3px solid #8bc34a"
                                 }}
                                 onClick={handleCheckclicked}>
-
 
                                 <CheckIcon />
 
@@ -246,11 +250,8 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
                                 <DeleteIcon />
                             </IconButton>
 
-
                         </Grid>
                     </Grid>
-
-
 
                 </CardContent>
 
