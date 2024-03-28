@@ -22,6 +22,7 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
     const [showDeleteDialog, setShowDeleteDialog] = useState(false)
     const [showUpdateDialog, setShowUpdateDialog] = useState(false)
     const [updatedTodo, setUpdatedTodo] = useState({ title: objectTodo.title, details: objectTodo.details })
+
     function handleCheckclicked() {
         handleCheck(objectTodo.id)
     }
@@ -195,7 +196,7 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
                 <CardContent>
                     <Grid container spacing={2}>
                         <Grid xs={8} >
-                            <Typography variant="h6" style={{ textAlign: "right" }}>{objectTodo.title}</Typography>
+                            <Typography variant="h6" style={{ textAlign: "right", textDecoration: objectTodo.isComleted ? "line-through" : 'none' }}>{objectTodo.title}</Typography>
                             <Typography variant="h6" style={{ textAlign: "right" }}>{objectTodo.details}</Typography>
 
                         </Grid>

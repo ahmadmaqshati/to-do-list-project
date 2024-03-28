@@ -19,16 +19,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { jsx } from '@emotion/react';
 
 const initionlTodos = [
-    {
-        id: uuidv4(),
-        title: "1)قراءة سورة الملك بعد العشاء",
-        details: "<من قرأ تبارك الذي بيده الملك كل ليلة منعه الله عز وجل بها من عذاب القبر>",
-        isComleted: false
 
-    },
     {
         id: uuidv4(),
-        title: "2)فهم الuseEffect في رياكت",
+        title: "فهم الuseEffect في رياكت",
         details: "",
         isComleted: false
     },
@@ -38,7 +32,8 @@ const initionlTodos = [
         title: "3) مراجعة الasync/await في الجافا سكريبت",
         details: "",
         isComleted: false
-    }
+    },
+
 
 ]
 
@@ -90,9 +85,9 @@ export default function TodoList() {
     Mapping on Data Array that Stored Inside (State)
     Then Return Data With Child Componant (Todo Componant)
     =========================================================*/
-    const todosDisplay = todos.map((t) => {
-        return <Todo key={t.id} objectTodo={t} handleCheck={handleCheckclicked} todos={todos} setTodos={setTodos} /* handlDelete={handlDeleteConfirm} */ />
-    })
+    /* const todosDisplay = todos.map((t) => {
+        return <Todo key={t.id} objectTodo={t} handleCheck={handleCheckclicked} todos={todos} setTodos={setTodos} />
+    }) */
 
 
     /* UseEffect */
@@ -100,7 +95,7 @@ export default function TodoList() {
         setTodos(JSON.parse(localStorage.getItem("todos")))
     }, [])
 
-    //Filtration Array 
+    //Filtration Array and render the  
     const completedTodos = todos.filter((t) => {
         return t.isComleted
     })
@@ -112,13 +107,14 @@ export default function TodoList() {
         todosToBeRenderd = completedTodos
     } else if (displayedTodosType == 'nonCompleted') {
         todosToBeRenderd = nonCompletedTodos
+    } else {
+        todosToBeRenderd = todos
     }
 
 
     const todosShow = todosToBeRenderd.map((t) => {
         return <Todo key={t.id} objectTodo={t} handleCheck={handleCheckclicked} todos={todos} setTodos={setTodos} /* handlDelete={handlDeleteConfirm} */ />
     })
-
 
 
     function changeDisplayType(e) {
