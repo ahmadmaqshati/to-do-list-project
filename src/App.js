@@ -13,7 +13,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App" style={{ display: 'flex', justifyContent: "center", alignItems: "center", /* background: "#191A1D" */ height: "100vh", direction: 'rtl' }}>
+
+      <div className="App" style={{ margin: "50px 0", direction: 'rtl' /* display: 'flex', justifyContent: "center", alignItems: "center", height: "100vh", */ }}>
         <TodoList />
       </div>
     </ThemeProvider>

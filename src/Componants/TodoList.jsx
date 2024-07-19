@@ -17,6 +17,9 @@ import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { jsx } from '@emotion/react';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 
 const initionlTodos = [
 
@@ -92,7 +95,7 @@ export default function TodoList() {
 
     /* UseEffect */
     useEffect(() => {
-        setTodos(JSON.parse(localStorage.getItem("todos")))
+        setTodos(JSON.parse(localStorage.getItem("todos")) ?? [])
     }, [])
 
     //Filtration Array and render the  
@@ -126,14 +129,14 @@ export default function TodoList() {
 
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
             {/*===============================main card==============================*/}
-            <Card sx={{ minWidth: 275, background: "#7100ffb5" }}>
+            <Card sx={{ /* minWidth: 275, */ background: "#7100ffb5", }}>
                 <CardContent>
                     <Typography variant="h3" sx={{ fontWeight: "700", color: "#e22bba" }} >
                         مهامي
                     </Typography>
-                    <Divider />
+                    <Divider style={{ marginTop: "25px" }} />
 
                     {/*
                     ==========================================
@@ -173,6 +176,7 @@ export default function TodoList() {
                      */}
 
                     {/*  {todosDisplay} */}
+
                     {todosShow}
 
                     {/* ======================== ALL TODOS ====================== */}
@@ -180,7 +184,7 @@ export default function TodoList() {
 
 
 
-                    <Grid container spacing={2} sx={{ marginTop: "20px" }}>
+                    <Grid container spacing={2} sx={{ marginTop: "20px", alignItems: "center" }}>
                         <Grid xs={8}>
                             <TextField
                                 style={{ width: "100%" }}
@@ -191,17 +195,19 @@ export default function TodoList() {
                                 onChange={(e) => {
                                     setTodosFeild(e.target.value)
                                 }}
-
                             />
 
                         </Grid>
                         <Grid xs={4}>
                             {/* Add-Btn */}
-                            <Button
-                                style={{ width: "100%", height: "100%", background: '#bf2be2' }}
+                            <Button className='add-btn'
+                                style={{/*  width: "60%" height: "100%"*/fontSize: "3rem", background: '#bf2be2', borderRadius: "50%", width: "70px", height: "70px" }}
                                 variant="contained"
                                 onClick={handleAddclicked}>
-                                إضافة مهمة جديدة
+                                {/*  إضافة مهمة جديدة */}
+                                {/*   <AddCircleOutlineIcon /> */}
+                                <AddIcon />
+
                             </Button>
                             {/* === Add-Btn === */}
                         </Grid>
@@ -212,7 +218,7 @@ export default function TodoList() {
             {/*===============================main card============================*/}
 
 
-        </Container>
+        </Container >
 
     );
 }

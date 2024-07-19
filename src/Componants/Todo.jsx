@@ -191,7 +191,8 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
                                            Todo-Compoanat
             =======================================================================
             */}
-            <Card className='card-body' sx={{ minWidth: 275, background: "#00000029", color: 'white', marginTop: 4 }}>
+
+            <Card className='card-body' sx={{ background: "#00000029", color: 'white', marginTop: 4 }}>
 
                 <CardContent>
                     <Grid container spacing={2}>
@@ -200,15 +201,15 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
                             <Typography variant="h6" style={{ textAlign: "right" }}>{objectTodo.details}</Typography>
 
                         </Grid>
-                        <Grid xs={4} display='flex' justifyContent="space-around" alignItems="center"  >
+                        <Grid className='buttons' xs={4} display='flex' justifyContent="space-around" alignItems="center">
 
                             {/*
-                            =============
-                            Check-Button
-                            =============
-                            */}
+                             =============
+                             Check-Button
+                             =============
+                             */}
                             <IconButton
-                                className='icon-button'
+                                className='icon-button check'
                                 style={{
                                     background: objectTodo.isComleted ? 'green' : '#FFFFFF',
                                     color: '#8bc34a',
@@ -222,26 +223,26 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
 
 
                             {/*
-                            =============
-                            Edit-Button
-                            =============
-                            */}
+                             =============
+                             Edit-Button
+                             =============
+                             */}
                             <IconButton
                                 onClick={handleEditClick}
-                                className='icon-button'
+                                className='icon-button edit'
                                 style={{ background: "white", border: "3px solid #A6C2E7", color: "#3F5971" }}>
                                 <EditIcon />
                             </IconButton>
 
 
                             {/*
-                            =============
-                            Delete-Button
-                            =============
-                            */}
+                             =============
+                             Delete-Button
+                             =============
+                             */}
                             <IconButton
                                 onClick={handleDeleteClick}
-                                className='icon-button'
+                                className='icon-button delete delete'
                                 style={{
                                     background: "#FFFDFF",
                                     border: "3px solid rgb(244 0 0 / 42%)",
@@ -258,6 +259,7 @@ export default function Todo({ objectTodo, handleCheck, handlDelete, todos, setT
 
 
             </Card >
+
 
         </>
 
